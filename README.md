@@ -78,7 +78,7 @@ Here's a grammar (like the ones we discussed in class) for MLB:
   | ID
   | ID LPAREN <args>
   | NUM
-  | LPAREN <expr> <rparen>
+  | LPAREN <expr> RPAREN
 
 <args> ::=
   | RPAREN
