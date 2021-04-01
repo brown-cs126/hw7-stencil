@@ -62,6 +62,8 @@ let get_token s index =
   else if Str.string_match then_regex s index then (Some THEN, Str.match_end ())
   else if Str.string_match else_regex s index then (Some ELSE, Str.match_end ())
   else if Str.string_match plus_regex s index then (Some PLUS, Str.match_end ())
+  else if Str.string_match num_regex s index then
+    (Some (NUM (int_of_string (Str.matched_group 1 s))), Str.match_end ())
   else if Str.string_match minus_regex s index then
     (Some MINUS, Str.match_end ())
   else if Str.string_match eq_regex s index then (Some EQ, Str.match_end ())
@@ -76,8 +78,6 @@ let get_token s index =
     (Some SEMICOLON, Str.match_end ())
   else if Str.string_match id_regex s index then
     (Some (ID (Str.matched_group 1 s)), Str.match_end ())
-  else if Str.string_match num_regex s index then
-    (Some (NUM (int_of_string (Str.matched_group 1 s))), Str.match_end ())
   else raise (TokenizerError index)
 
 let tokenize s : token list =
